@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { entityConfig } from './entity-metadata';
   ],
   imports: [
     BrowserModule,
-    EntityDataModule.forRoot(entityConfig)
+    EntityDataModule.forRoot(entityConfig),
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
