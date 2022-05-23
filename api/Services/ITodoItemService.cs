@@ -4,9 +4,13 @@ namespace Api.Services;
 
 public interface ITodoItemService
 {
-    Task<IEnumerable<TodoItem>> GetAllAsync(CancellationToken cancellationToken);
+    TodoItem Create(TodoItem todoItem);
 
-    Task<TodoItem?> GetByIdAsync(Guid Id, CancellationToken cancellationToken);
+    IEnumerable<TodoItem> GetAll();
 
-    Task DeleteByIdAsync(Guid Id, CancellationToken cancellationToken);
+    TodoItem? GetById(Guid Id);
+
+    void DeleteById(Guid Id);
+
+    TodoItem? Update(TodoItem todoItem);
 }

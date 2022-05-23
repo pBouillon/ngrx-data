@@ -4,22 +4,50 @@ namespace Api.Services;
 
 public class TodoItemService : ITodoItemService
 {
-    private IReadOnlyList<TodoItem> _todoItems;
+    private IEnumerable<TodoItem> _todoItems;
 
     public TodoItemService()
         => _todoItems = Array.Empty<TodoItem>();
 
-    public Task DeleteByIdAsync(Guid Id, CancellationToken cancellationToken)
+    public TodoItem Create(TodoItem todoItem)
     {
-        throw new NotImplementedException();
+        var created = todoItem with { Id = Guid.NewGuid() };
+        _todoItems = _todoItems.Append(created);
+
+        return created;
     }
 
-    public Task<IEnumerable<TodoItem>> GetAllAsync(CancellationToken cancellationToken)
-        => Task.FromResult(_todoItems.AsEnumerable());
+    public void DeleteById(Guid Id)
+        => _todoItems = _todoItems.Where(item => item.Id != Id);
 
-    public Task<TodoItem?> GetByIdAsync(Guid Id, CancellationToken cancellationToken)
+    public IEnumerable<TodoItem> GetAll()
+        => _todoItems.OrderBy(item => item.Priority).ToList();
+
+    public TodoItem? GetById(Guid Id)
+        => _todoItems.FirstOrDefault(item => item.Id == Id);
+
+    public TodoItem? Update(TodoItem todoItem)
     {
-        var item = _todoItems.FirstOrDefault(item => item.Id == Id);
-        return Task.FromResult(item);
+        var existingTodoItem = _todoItems.FirstOrDefault(item => item.Id == todoItem.Id);
+
+        if (existingTodoItem is null)
+        {
+            return null;
+        }
+
+        var todoItems = _todoItems.ToList();
+
+        var index = todoItems.IndexOf(existingTodoItem);
+
+        todoItems[index] = existingTodoItem with
+        {
+            IsCompleted = todoItem.IsCompleted,
+            Name = todoItem.Name,
+            Priority = todoItem.Priority,
+        };
+
+        _todoItems = todoItems;
+
+        return todoItems[index];
     }
 }
