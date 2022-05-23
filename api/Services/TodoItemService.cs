@@ -4,10 +4,12 @@ namespace Api.Services;
 
 public class TodoItemService : ITodoItemService
 {
-    private IEnumerable<TodoItem> _todoItems;
-
-    public TodoItemService()
-        => _todoItems = Array.Empty<TodoItem>();
+    private IEnumerable<TodoItem> _todoItems = new[]
+    {
+        new TodoItem(Id: Guid.NewGuid(), Name: "Make coffee", IsCompleted: true),
+        new TodoItem(Id: Guid.NewGuid(), Name: "Water the plants", Priority: Priority.High),
+        new TodoItem(Id: Guid.NewGuid(), Name: "Fix those bugs", Priority: Priority.Low),
+    };
 
     public TodoItem Create(TodoItem todoItem)
     {

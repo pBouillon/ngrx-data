@@ -1,3 +1,3 @@
 namespace Api.Models;
 
-public record TodoItem(Guid Id, string Name, bool IsCompleted, Priority Priority = Priority.Medium);
+public record TodoItem(Guid Id, string Name, bool IsCompleted = false, Priority Priority = Priority.Medium);
