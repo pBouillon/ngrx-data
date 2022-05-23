@@ -3,6 +3,15 @@ using Api.Services;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin();
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+    });
+});
 
 builder.Services.AddSingleton<ITodoItemService, TodoItemService>();
 
@@ -14,6 +23,8 @@ builder.Services.AddSwaggerGen(options => options.SwaggerDoc("v1", new OpenApiIn
 }));
 
 var app = builder.Build();
+app.UseCors();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 

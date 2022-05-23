@@ -7,21 +7,21 @@ public static class TodoEndpoints
 {
     public static WebApplication MapTodoEndpoints(this WebApplication app)
     {
-        app.MapPost("/api/todo", Create)
+        app.MapPost("/api/todoitems", Create)
             .Produces<TodoItem>(StatusCodes.Status200OK);
 
-        app.MapGet("/api/todo", GetAll)
+        app.MapGet("/api/todoitems", GetAll)
             .Produces<IEnumerable<TodoItem>>(StatusCodes.Status200OK);
 
-        app.MapGet("/api/todo/{id}", GetById)
+        app.MapGet("/api/todoitems/{id}", GetById)
             .Produces<TodoItem>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest);
 
-        app.MapDelete("/api/todo/{id}", DeleteById)
+        app.MapDelete("/api/todoitems/{id}", DeleteById)
             .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status400BadRequest);
 
-        app.MapPut("/api/todo/{id}", Update)
+        app.MapPut("/api/todoitems/{id}", Update)
             .Produces<TodoItem>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status404NotFound);
