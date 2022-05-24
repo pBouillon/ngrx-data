@@ -13,15 +13,15 @@ public static class TodoEndpoints
         app.MapGet("/api/todoitems", GetAll)
             .Produces<IEnumerable<TodoItem>>(StatusCodes.Status200OK);
 
-        app.MapGet("/api/todoitems/{id}", GetById)
+        app.MapGet("/api/todoitem/{id}", GetById)
             .Produces<TodoItem>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest);
 
-        app.MapDelete("/api/todoitems/{id}", DeleteById)
+        app.MapDelete("/api/todoitem/{id}", DeleteById)
             .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status400BadRequest);
 
-        app.MapPut("/api/todoitems/{id}", Update)
+        app.MapPut("/api/todoitem/{id}", Update)
             .Produces<TodoItem>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status404NotFound);

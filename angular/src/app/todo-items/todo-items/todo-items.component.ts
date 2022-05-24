@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TodoItem } from '../../models';
+import { TodoItem } from '../../core';
 import { TodoItemService } from '../todo-item.service';
 
 @Component({
@@ -21,4 +21,14 @@ export class TodoItemsComponent implements OnInit {
     this.todoItemService.getAll();
   }
 
+  remove(todoItem: TodoItem): void {
+    this.todoItemService.delete(todoItem);
+  }
+
+  toggleComplete(todoItem: TodoItem): void {
+    this.todoItemService.update({
+      ...todoItem,
+      isCompleted: !todoItem.isCompleted,
+    });
+  }
 }

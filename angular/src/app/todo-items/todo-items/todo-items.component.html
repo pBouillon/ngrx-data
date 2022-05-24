@@ -1,0 +1,8 @@
+<div class="mx-3">
+  <app-todo-item
+    *ngFor="let todoItem of todoItems$ | async"
+    [todoItem]="todoItem"
+    (onRemove)="remove($event)"
+    (onToggleComplete)="toggleComplete($event)"  >
+  </app-todo-item>
+</div>

@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { DefaultDataService, DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'todo-items',
     loadChildren: () =>
-      import('./core/todo-items/todo-items.module').then(m => m.TodoItemsModule),
+      import('./todo-items/todo-items.module').then(m => m.TodoItemsModule),
   },
 ];
 

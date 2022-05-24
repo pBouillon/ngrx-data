@@ -3,7 +3,7 @@ import {
   EntityCollectionServiceBase,
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
-import { TodoItem } from '../models';
+import { TodoItem } from '../core';
 
 @Injectable({ providedIn: 'root' })
 export class TodoItemService extends EntityCollectionServiceBase<TodoItem> {
