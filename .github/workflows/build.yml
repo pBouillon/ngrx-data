@@ -1,0 +1,39 @@
+name: Continuous Integration
+
+on: [push]
+
+jobs:
+  - name: Build the Angular project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Cache node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: |
+          cd ./angular
+          npm install
+      - name: Build the Angular project
+        run:  |
+          cd ./angular
+          npm run build -- --configuration=production
+
+  - name: Build the .NET project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - run: |
+          cd ./api
+          dotnet build --configuration Release
