@@ -6,7 +6,6 @@ import { TodoItemService } from '../todo-item.service';
 @Component({
   selector: 'app-todo-items',
   templateUrl: './todo-items.component.html',
-  styles: [],
 })
 export class TodoItemsComponent implements OnInit {
   loading$: Observable<boolean>;
@@ -19,6 +18,9 @@ export class TodoItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.todoItemService.getAll();
+  }
+
+  openCreationModal(): void {
   }
 
   remove(todoItem: TodoItem): void {

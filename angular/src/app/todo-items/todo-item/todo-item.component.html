@@ -1,10 +1,10 @@
 <div
-  class="flex justify-between p-3 border hover:cursor-pointer hover:bg-gray-50"
+  class="flex justify-between p-3 border rounded-lg hover:cursor-pointer hover:bg-gray-50"
   (click)="toggleComplete()"
 >
   <div
     class="flex items-center gap-3 text-lg"
-    [ngClass]="{ 'text-gray-500 line-through': todoItem.isCompleted }"
+    [ngClass]="{ 'text-gray-300 line-through': todoItem.isCompleted }"
   >
     <i
       class="bi"

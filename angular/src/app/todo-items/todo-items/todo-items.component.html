@@ -1,8 +1,15 @@
-<div class="mx-3">
+<div class="inline-flex items-center gap-2 m-3 text-2xl">
+  <i class="bi bi-list-check"></i>
+  <h2 class="">Your tasks</h2>
+</div>
+
+<div class="flex flex-col gap-3 mx-3 md:w-1/2 md:mx-auto">
   <app-todo-item
     *ngFor="let todoItem of todoItems$ | async"
     [todoItem]="todoItem"
     (onRemove)="remove($event)"
-    (onToggleComplete)="toggleComplete($event)"  >
+    (onToggleComplete)="toggleComplete($event)"
+  >
   </app-todo-item>
+  <app-new-todo-item (onCreate)="openCreationModal()"></app-new-todo-item>
 </div>
