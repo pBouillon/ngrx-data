@@ -3,7 +3,8 @@ name: Continuous Integration
 on: [push]
 
 jobs:
-  - name: Build the Angular project
+  front:
+    name: Build the Angular project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,7 +27,8 @@ jobs:
           cd ./angular
           npm run build -- --configuration=production
 
-  - name: Build the .NET project
+  back:
+    name: Build the .NET project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
