@@ -1,15 +1,25 @@
-<div class="inline-flex items-center gap-2 m-3 text-2xl">
-  <i class="bi bi-list-check"></i>
-  <h2 class="">Your tasks</h2>
+<div class="mx-3 md:w-1/2 md:mx-auto">
+  <div class="inline-flex items-center gap-2 my-5 text-2xl">
+    <i class="bi bi-list-check"></i>
+    <h2>Your tasks</h2>
+  </div>
+
+  <div class="flex flex-col gap-3">
+    <app-todo-item
+      *ngFor="let todoItem of todoItems$ | async"
+      [todoItem]="todoItem"
+      (onRemove)="remove($event)"
+      (onToggleComplete)="toggleComplete($event)"
+    >
+    </app-todo-item>
+    <app-new-todo-item (onCreate)="openCreationModal()"></app-new-todo-item>
+  </div>
+
+  <app-todo-creation
+    *ngIf="showCreationModal$ | async"
+    (onCreate)="create($event)"
+    (onClose)="closeCreationModal()"
+  ></app-todo-creation>
 </div>
 
-<div class="flex flex-col gap-3 mx-3 md:w-1/2 md:mx-auto">
-  <app-todo-item
-    *ngFor="let todoItem of todoItems$ | async"
-    [todoItem]="todoItem"
-    (onRemove)="remove($event)"
-    (onToggleComplete)="toggleComplete($event)"
-  >
-  </app-todo-item>
-  <app-new-todo-item (onCreate)="openCreationModal()"></app-new-todo-item>
-</div>
+

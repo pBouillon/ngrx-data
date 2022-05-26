@@ -7,11 +7,11 @@ public static class TodoEndpoints
 {
     public static WebApplication MapTodoEndpoints(this WebApplication app)
     {
-        app.MapPost("/api/todoitems", Create)
-            .Produces<TodoItem>(StatusCodes.Status200OK);
-
         app.MapGet("/api/todoitems", GetAll)
             .Produces<IEnumerable<TodoItem>>(StatusCodes.Status200OK);
+
+        app.MapPost("/api/todoitem", Create)
+            .Produces<TodoItem>(StatusCodes.Status200OK);
 
         app.MapGet("/api/todoitem/{id}", GetById)
             .Produces<TodoItem>(StatusCodes.Status200OK)

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { TodoItem } from '../../core';
 import { TodoItemService } from '../todo-item.service';
 
@@ -11,6 +11,8 @@ export class TodoItemsComponent implements OnInit {
   loading$: Observable<boolean>;
   todoItems$: Observable<TodoItem[]>;
 
+  showCreationModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(private readonly todoItemService: TodoItemService) {
     this.loading$ = this.todoItemService.loading$;
     this.todoItems$ = this.todoItemService.entities$;
@@ -20,7 +22,16 @@ export class TodoItemsComponent implements OnInit {
     this.todoItemService.getAll();
   }
 
+  closeCreationModal(): void {
+    this.showCreationModal$.next(false);
+  }
+
+  create(todoItem: TodoItem): void {
+    this.todoItemService.add(todoItem);
+  }
+
   openCreationModal(): void {
+    this.showCreationModal$.next(true);
   }
 
   remove(todoItem: TodoItem): void {
